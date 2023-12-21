@@ -6,4 +6,6 @@ COPY . /app
 
 RUN pip install -r requirement.txt
 
-CMD uvicorn main:app --port=5000 --host=0.0.0.0
+COPY . .
+
+CMD python ./app.py
