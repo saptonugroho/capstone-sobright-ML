@@ -1,13 +1,18 @@
-FROM python:3.10-slim
+# Gunakan image Python sebagai dasar
+FROM python:3.10
 
-ENV PYTHONBUFFERED True
+# Set working directory di dalam container
+WORKDIR /app
 
-ENV APP_HOME /app
+# Salin file requirements.txt dan install dependencies
+COPY requirement.txt .
+RUN pip install -r requirement.txt
 
-WORKDIR $APP_HOME
+# Salin seluruh konten aplikasi Flask
+COPY . .
 
-COPY . ./
+# Ekspose port yang digunakan oleh aplikasi Flask
+EXPOSE 5000
 
-RUN pip install -r requirements.txt
-
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 app:app
+# Command untuk menjalankan aplikasi saat container dimulai
+CMD ["python", "app.py"]
