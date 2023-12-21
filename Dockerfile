@@ -8,4 +8,6 @@ RUN pip install -r requirement.txt
 
 COPY . .
 
+EXPOSE 3000
+
 CMD python ./app.py
